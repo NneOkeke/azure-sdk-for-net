@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Autorest.CSharp.Core;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager.ComputeSchedule.Models;
@@ -19,6 +20,8 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
     {
         private ClientDiagnostics _scheduledActionsClientDiagnostics;
         private ScheduledActionsRestOperations _scheduledActionsRestClient;
+        private ClientDiagnostics _autoActionClientDiagnostics;
+        private AutoActionsRestOperations _autoActionRestClient;
 
         /// <summary> Initializes a new instance of the <see cref="MockableComputeScheduleSubscriptionResource"/> class for mocking. </summary>
         protected MockableComputeScheduleSubscriptionResource()
@@ -34,15 +37,17 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
 
         private ClientDiagnostics ScheduledActionsClientDiagnostics => _scheduledActionsClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.ComputeSchedule", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private ScheduledActionsRestOperations ScheduledActionsRestClient => _scheduledActionsRestClient ??= new ScheduledActionsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+        private ClientDiagnostics AutoActionClientDiagnostics => _autoActionClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.ComputeSchedule", AutoActionResource.ResourceType.Namespace, Diagnostics);
+        private AutoActionsRestOperations AutoActionRestClient => _autoActionRestClient ??= new AutoActionsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(AutoActionResource.ResourceType));
 
-        private string GetApiVersionOrNull(ResourceType resourceType)
+        private string GetApiVersionOrNull(Core.ResourceType resourceType)
         {
             TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future.
+        /// virtualMachinesSubmitDeallocate: submitDeallocate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -54,7 +59,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -83,7 +88,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future.
+        /// virtualMachinesSubmitDeallocate: submitDeallocate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -95,7 +100,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -124,7 +129,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitHibernate: Schedule hibernate operation for a batch of virtual machines at datetime in future.
+        /// virtualMachinesSubmitHibernate: submitHibernate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -136,7 +141,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -165,7 +170,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitHibernate: Schedule hibernate operation for a batch of virtual machines at datetime in future.
+        /// virtualMachinesSubmitHibernate: submitHibernate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -177,7 +182,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -206,7 +211,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitStart: Schedule start operation for a batch of virtual machines at datetime in future.
+        /// virtualMachinesSubmitStart: submitStart for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -218,7 +223,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -247,7 +252,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitStart: Schedule start operation for a batch of virtual machines at datetime in future.
+        /// virtualMachinesSubmitStart: submitStart for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -259,7 +264,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -288,7 +293,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteDeallocate: executeDeallocate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -300,7 +305,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -329,7 +334,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteDeallocate: executeDeallocate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -341,7 +346,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -370,7 +375,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteHibernate: executeHibernate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -382,7 +387,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -411,7 +416,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteHibernate: executeHibernate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -423,7 +428,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -452,7 +457,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteStart: executeStart for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -464,7 +469,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -493,7 +498,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteStart: executeStart for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -505,7 +510,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -534,7 +539,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines
+        /// virtualMachinesGetOperationStatus: getOperationStatus for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -546,7 +551,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -575,7 +580,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines
+        /// virtualMachinesGetOperationStatus: getOperationStatus for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -587,7 +592,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -616,7 +621,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request
+        /// virtualMachinesCancelOperations: cancelOperations for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -628,7 +633,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -657,7 +662,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request
+        /// virtualMachinesCancelOperations: cancelOperations for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -669,7 +674,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// </summary>
@@ -698,85 +703,63 @@ namespace Azure.ResourceManager.ComputeSchedule.Mocking
         }
 
         /// <summary>
-        /// VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist.
+        /// List AutoAction resources by subscription ID
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationErrors</description>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/autoActions</description>
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>ScheduledActions_GetVirtualMachineOperationErrors</description>
+        /// <description>AutoAction_ListBySubscription</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AutoActionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="locationparameter"> The location name. </param>
-        /// <param name="content"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="locationparameter"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="locationparameter"/> or <paramref name="content"/> is null. </exception>
-        public virtual async Task<Response<GetOperationErrorsResult>> GetVirtualMachineOperationErrorsAsync(string locationparameter, GetOperationErrorsContent content, CancellationToken cancellationToken = default)
+        /// <returns> An async collection of <see cref="AutoActionResource"/> that may take multiple service requests to iterate over. </returns>
+        public virtual AsyncPageable<AutoActionResource> GetAutoActionsAsync(CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(locationparameter, nameof(locationparameter));
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ScheduledActionsClientDiagnostics.CreateScope("MockableComputeScheduleSubscriptionResource.GetVirtualMachineOperationErrors");
-            scope.Start();
-            try
-            {
-                var response = await ScheduledActionsRestClient.GetVirtualMachineOperationErrorsAsync(Id.SubscriptionId, locationparameter, content, cancellationToken).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => AutoActionRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => AutoActionRestClient.CreateListBySubscriptionNextPageRequest(nextLink, Id.SubscriptionId);
+            return GeneratorPageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new AutoActionResource(Client, AutoActionData.DeserializeAutoActionData(e)), AutoActionClientDiagnostics, Pipeline, "MockableComputeScheduleSubscriptionResource.GetAutoActions", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
-        /// VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist.
+        /// List AutoAction resources by subscription ID
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationErrors</description>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/autoActions</description>
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>ScheduledActions_GetVirtualMachineOperationErrors</description>
+        /// <description>AutoAction_ListBySubscription</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AutoActionResource"/></description>
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="locationparameter"> The location name. </param>
-        /// <param name="content"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="locationparameter"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="locationparameter"/> or <paramref name="content"/> is null. </exception>
-        public virtual Response<GetOperationErrorsResult> GetVirtualMachineOperationErrors(string locationparameter, GetOperationErrorsContent content, CancellationToken cancellationToken = default)
+        /// <returns> A collection of <see cref="AutoActionResource"/> that may take multiple service requests to iterate over. </returns>
+        public virtual Pageable<AutoActionResource> GetAutoActions(CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(locationparameter, nameof(locationparameter));
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var scope = ScheduledActionsClientDiagnostics.CreateScope("MockableComputeScheduleSubscriptionResource.GetVirtualMachineOperationErrors");
-            scope.Start();
-            try
-            {
-                var response = ScheduledActionsRestClient.GetVirtualMachineOperationErrors(Id.SubscriptionId, locationparameter, content, cancellationToken);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => AutoActionRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => AutoActionRestClient.CreateListBySubscriptionNextPageRequest(nextLink, Id.SubscriptionId);
+            return GeneratorPageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new AutoActionResource(Client, AutoActionData.DeserializeAutoActionData(e)), AutoActionClientDiagnostics, Pipeline, "MockableComputeScheduleSubscriptionResource.GetAutoActions", "value", "nextLink", cancellationToken);
         }
     }
 }

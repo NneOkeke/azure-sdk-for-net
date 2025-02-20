@@ -8,7 +8,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Azure.Core;
 
 namespace Azure.ResourceManager.ComputeSchedule.Models
 {
@@ -50,7 +49,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         /// <summary> Initializes a new instance of <see cref="UserRequestResources"/>. </summary>
         /// <param name="ids"> The resource ids used for the request. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="ids"/> is null. </exception>
-        public UserRequestResources(IEnumerable<ResourceIdentifier> ids)
+        public UserRequestResources(IEnumerable<string> ids)
         {
             Argument.AssertNotNull(ids, nameof(ids));
 
@@ -60,7 +59,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         /// <summary> Initializes a new instance of <see cref="UserRequestResources"/>. </summary>
         /// <param name="ids"> The resource ids used for the request. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal UserRequestResources(IList<ResourceIdentifier> ids, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal UserRequestResources(IList<string> ids, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             Ids = ids;
             _serializedAdditionalRawData = serializedAdditionalRawData;
@@ -72,6 +71,6 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         }
 
         /// <summary> The resource ids used for the request. </summary>
-        public IList<ResourceIdentifier> Ids { get; }
+        public IList<string> Ids { get; }
     }
 }

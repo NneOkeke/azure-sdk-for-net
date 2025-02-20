@@ -1,16 +1,6 @@
-# Microsoft Azure ComputeSchedule management client library for .NET
+# Microsoft Azure Computeschedule management client library for .NET
 
-Microsoft Azure ComputeSchedule allows customers to schedule one off operations on their virtual machines. These operations include:
-- Start
-- Deallocate
-- Hibernate
-
-There are 2 groups of schedule type operations that customers can perform on their virtual machines
-
-- `Submit Type Operations`: These type of operations can be scheduled at a later date in the future, up to 14 days ahead.
-- `Execute Type Operations`: These type of operations allow clients to perform operations on their virtual machines immediately.
-
-Other operations include endpoints to get operation status on virtual machines, cancel operations scheduled on virtual machines and get errors that might have occured during operations.
+**[Describe the service briefly first.]**
 
 This library follows the [new Azure SDK guidelines](https://azure.github.io/azure-sdk/general_introduction.html), and provides many core capabilities:
 
@@ -24,10 +14,10 @@ This library follows the [new Azure SDK guidelines](https://azure.github.io/azur
 
 ### Install the package
 
-Install the Microsoft Azure ComputeSchedule management library for .NET with [NuGet](https://www.nuget.org/):
+Install the Microsoft Azure Computeschedule management library for .NET with [NuGet](https://www.nuget.org/):
 
 ```dotnetcli
-dotnet add package Azure.ResourceManager.ComputeSchedule
+dotnet add package Azure.ResourceManager.ComputeSchedule --prerelease
 ```
 
 ### Prerequisites
@@ -47,7 +37,7 @@ Key concepts of the Microsoft Azure SDK for .NET can be found [here](https://azu
 Documentation is available to help you learn how to use this package:
 
 - [Quickstart](https://github.com/Azure/azure-sdk-for-net/blob/main/doc/dev/mgmt_quickstart.md).
-- [API References](https://learn.microsoft.com/dotnet/api/?view=azure-dotnet).
+- [API References](https://docs.microsoft.com/dotnet/api/?view=azure-dotnet).
 - [Authentication](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/identity/Azure.Identity/README.md).
 
 ## Examples

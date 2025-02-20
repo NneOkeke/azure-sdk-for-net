@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         {
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
             _endpoint = endpoint ?? new Uri("https://management.azure.com");
-            _apiVersion = apiVersion ?? "2024-10-01";
+            _apiVersion = apiVersion ?? "2024-08-01-preview";
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
@@ -72,7 +72,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             return message;
         }
 
-        /// <summary> VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future. </summary>
+        /// <summary> virtualMachinesSubmitDeallocate: submitDeallocate for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             }
         }
 
-        /// <summary> VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future. </summary>
+        /// <summary> virtualMachinesSubmitDeallocate: submitDeallocate for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -166,7 +166,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             return message;
         }
 
-        /// <summary> VirtualMachinesSubmitHibernate: Schedule hibernate operation for a batch of virtual machines at datetime in future. </summary>
+        /// <summary> virtualMachinesSubmitHibernate: submitHibernate for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -195,7 +195,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             }
         }
 
-        /// <summary> VirtualMachinesSubmitHibernate: Schedule hibernate operation for a batch of virtual machines at datetime in future. </summary>
+        /// <summary> virtualMachinesSubmitHibernate: submitHibernate for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -260,7 +260,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             return message;
         }
 
-        /// <summary> VirtualMachinesSubmitStart: Schedule start operation for a batch of virtual machines at datetime in future. </summary>
+        /// <summary> virtualMachinesSubmitStart: submitStart for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -289,7 +289,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             }
         }
 
-        /// <summary> VirtualMachinesSubmitStart: Schedule start operation for a batch of virtual machines at datetime in future. </summary>
+        /// <summary> virtualMachinesSubmitStart: submitStart for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -354,7 +354,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             return message;
         }
 
-        /// <summary> VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. </summary>
+        /// <summary> virtualMachinesExecuteDeallocate: executeDeallocate for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -383,7 +383,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             }
         }
 
-        /// <summary> VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. </summary>
+        /// <summary> virtualMachinesExecuteDeallocate: executeDeallocate for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -448,7 +448,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             return message;
         }
 
-        /// <summary> VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. </summary>
+        /// <summary> virtualMachinesExecuteHibernate: executeHibernate for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -477,7 +477,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             }
         }
 
-        /// <summary> VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. </summary>
+        /// <summary> virtualMachinesExecuteHibernate: executeHibernate for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -542,7 +542,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             return message;
         }
 
-        /// <summary> VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. </summary>
+        /// <summary> virtualMachinesExecuteStart: executeStart for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -571,7 +571,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             }
         }
 
-        /// <summary> VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. </summary>
+        /// <summary> virtualMachinesExecuteStart: executeStart for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -636,7 +636,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             return message;
         }
 
-        /// <summary> VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines. </summary>
+        /// <summary> virtualMachinesGetOperationStatus: getOperationStatus for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -665,7 +665,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             }
         }
 
-        /// <summary> VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines. </summary>
+        /// <summary> virtualMachinesGetOperationStatus: getOperationStatus for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -730,7 +730,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             return message;
         }
 
-        /// <summary> VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request. </summary>
+        /// <summary> virtualMachinesCancelOperations: cancelOperations for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -759,7 +759,7 @@ namespace Azure.ResourceManager.ComputeSchedule
             }
         }
 
-        /// <summary> VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request. </summary>
+        /// <summary> virtualMachinesCancelOperations: cancelOperations for a virtual machine. </summary>
         /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
         /// <param name="locationparameter"> The location name. </param>
         /// <param name="content"> The request body. </param>
@@ -781,100 +781,6 @@ namespace Azure.ResourceManager.ComputeSchedule
                         CancelOperationsResult value = default;
                         using var document = JsonDocument.Parse(message.Response.ContentStream);
                         value = CancelOperationsResult.DeserializeCancelOperationsResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw new RequestFailedException(message.Response);
-            }
-        }
-
-        internal RequestUriBuilder CreateGetVirtualMachineOperationErrorsRequestUri(string subscriptionId, string locationparameter, GetOperationErrorsContent content)
-        {
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.ComputeSchedule/locations/", false);
-            uri.AppendPath(locationparameter, true);
-            uri.AppendPath("/virtualMachinesGetOperationErrors", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            return uri;
-        }
-
-        internal HttpMessage CreateGetVirtualMachineOperationErrorsRequest(string subscriptionId, string locationparameter, GetOperationErrorsContent content)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Post;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/subscriptions/", false);
-            uri.AppendPath(subscriptionId, true);
-            uri.AppendPath("/providers/Microsoft.ComputeSchedule/locations/", false);
-            uri.AppendPath(locationparameter, true);
-            uri.AppendPath("/virtualMachinesGetOperationErrors", false);
-            uri.AppendQuery("api-version", _apiVersion, true);
-            request.Uri = uri;
-            request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content0 = new Utf8JsonRequestContent();
-            content0.JsonWriter.WriteObjectValue(content, ModelSerializationExtensions.WireOptions);
-            request.Content = content0;
-            _userAgent.Apply(message);
-            return message;
-        }
-
-        /// <summary> VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="locationparameter"> The location name. </param>
-        /// <param name="content"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="locationparameter"/> or <paramref name="content"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="locationparameter"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<GetOperationErrorsResult>> GetVirtualMachineOperationErrorsAsync(string subscriptionId, string locationparameter, GetOperationErrorsContent content, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(locationparameter, nameof(locationparameter));
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var message = CreateGetVirtualMachineOperationErrorsRequest(subscriptionId, locationparameter, content);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        GetOperationErrorsResult value = default;
-                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                        value = GetOperationErrorsResult.DeserializeGetOperationErrorsResult(document.RootElement);
-                        return Response.FromValue(value, message.Response);
-                    }
-                default:
-                    throw new RequestFailedException(message.Response);
-            }
-        }
-
-        /// <summary> VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. The value must be an UUID. </param>
-        /// <param name="locationparameter"> The location name. </param>
-        /// <param name="content"> The request body. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="locationparameter"/> or <paramref name="content"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="locationparameter"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<GetOperationErrorsResult> GetVirtualMachineOperationErrors(string subscriptionId, string locationparameter, GetOperationErrorsContent content, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(locationparameter, nameof(locationparameter));
-            Argument.AssertNotNull(content, nameof(content));
-
-            using var message = CreateGetVirtualMachineOperationErrorsRequest(subscriptionId, locationparameter, content);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    {
-                        GetOperationErrorsResult value = default;
-                        using var document = JsonDocument.Parse(message.Response.ContentStream);
-                        value = GetOperationErrorsResult.DeserializeGetOperationErrorsResult(document.RootElement);
                         return Response.FromValue(value, message.Response);
                     }
                 default:

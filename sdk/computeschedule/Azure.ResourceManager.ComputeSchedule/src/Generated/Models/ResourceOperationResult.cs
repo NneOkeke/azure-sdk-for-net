@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace Azure.ResourceManager.ComputeSchedule.Models
 {
@@ -57,7 +56,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         /// <param name="errorDetails"> Resource level error details if they exist. </param>
         /// <param name="operation"> Details of the operation performed on a resource. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
-        internal ResourceOperationResult(ResourceIdentifier resourceId, string errorCode, string errorDetails, ResourceOperationDetails operation, IDictionary<string, BinaryData> serializedAdditionalRawData)
+        internal ResourceOperationResult(string resourceId, string errorCode, string errorDetails, ResourceOperationDetails operation, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
             ResourceId = resourceId;
             ErrorCode = errorCode;
@@ -67,7 +66,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         }
 
         /// <summary> Unique identifier for the resource involved in the operation, eg ArmId. </summary>
-        public ResourceIdentifier ResourceId { get; }
+        public string ResourceId { get; }
         /// <summary> Resource level error code if it exists. </summary>
         public string ErrorCode { get; }
         /// <summary> Resource level error details if they exist. </summary>

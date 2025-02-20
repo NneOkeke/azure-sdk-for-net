@@ -48,7 +48,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
 
         /// <summary> Initializes a new instance of <see cref="CancelOperationsContent"/>. </summary>
         /// <param name="operationIds"> The list of operation ids to cancel operations on. </param>
-        /// <param name="correlationId"> CorrelationId item. </param>
+        /// <param name="correlationId"> Correlationid item. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="operationIds"/> or <paramref name="correlationId"/> is null. </exception>
         public CancelOperationsContent(IEnumerable<string> operationIds, string correlationId)
         {
@@ -61,7 +61,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
 
         /// <summary> Initializes a new instance of <see cref="CancelOperationsContent"/>. </summary>
         /// <param name="operationIds"> The list of operation ids to cancel operations on. </param>
-        /// <param name="correlationId"> CorrelationId item. </param>
+        /// <param name="correlationId"> Correlationid item. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal CancelOperationsContent(IList<string> operationIds, string correlationId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -77,7 +77,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
 
         /// <summary> The list of operation ids to cancel operations on. </summary>
         public IList<string> OperationIds { get; }
-        /// <summary> CorrelationId item. </summary>
+        /// <summary> Correlationid item. </summary>
         public string CorrelationId { get; }
     }
 }

@@ -91,7 +91,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
             {
                 return null;
             }
-            ResourceIdentifier resourceId = default;
+            string resourceId = default;
             string errorCode = default;
             string errorDetails = default;
             ResourceOperationDetails operation = default;
@@ -101,11 +101,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
             {
                 if (property.NameEquals("resourceId"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    resourceId = new ResourceIdentifier(property.Value.GetString());
+                    resourceId = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("errorCode"u8))

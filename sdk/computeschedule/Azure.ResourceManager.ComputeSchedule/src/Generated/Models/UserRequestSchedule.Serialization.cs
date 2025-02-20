@@ -34,26 +34,10 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
                 throw new FormatException($"The model {nameof(UserRequestSchedule)} does not support writing '{format}' format.");
             }
 
-            if (Optional.IsDefined(Deadline))
-            {
-                writer.WritePropertyName("deadline"u8);
-                writer.WriteStringValue(Deadline.Value, "O");
-            }
-            if (Optional.IsDefined(UserRequestDeadline))
-            {
-                writer.WritePropertyName("deadLine"u8);
-                writer.WriteStringValue(UserRequestDeadline.Value, "O");
-            }
-            if (Optional.IsDefined(Timezone))
-            {
-                writer.WritePropertyName("timezone"u8);
-                writer.WriteStringValue(Timezone);
-            }
-            if (Optional.IsDefined(UserRequestTimezone))
-            {
-                writer.WritePropertyName("timeZone"u8);
-                writer.WriteStringValue(UserRequestTimezone);
-            }
+            writer.WritePropertyName("deadLine"u8);
+            writer.WriteStringValue(DeadLine, "O");
+            writer.WritePropertyName("timeZone"u8);
+            writer.WriteStringValue(TimeZone);
             writer.WritePropertyName("deadlineType"u8);
             writer.WriteStringValue(DeadlineType.ToString());
             if (options.Format != "W" && _serializedAdditionalRawData != null)
@@ -93,36 +77,16 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
             {
                 return null;
             }
-            DateTimeOffset? deadline = default;
-            DateTimeOffset? deadLine = default;
-            string timezone = default;
+            DateTimeOffset deadLine = default;
             string timeZone = default;
             ScheduledActionDeadlineType deadlineType = default;
             IDictionary<string, BinaryData> serializedAdditionalRawData = default;
             Dictionary<string, BinaryData> rawDataDictionary = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("deadline"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    deadline = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
                 if (property.NameEquals("deadLine"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
                     deadLine = property.Value.GetDateTimeOffset("O");
-                    continue;
-                }
-                if (property.NameEquals("timezone"u8))
-                {
-                    timezone = property.Value.GetString();
                     continue;
                 }
                 if (property.NameEquals("timeZone"u8))
@@ -141,13 +105,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
                 }
             }
             serializedAdditionalRawData = rawDataDictionary;
-            return new UserRequestSchedule(
-                deadline,
-                deadLine,
-                timezone,
-                timeZone,
-                deadlineType,
-                serializedAdditionalRawData);
+            return new UserRequestSchedule(deadLine, timeZone, deadlineType, serializedAdditionalRawData);
         }
 
         BinaryData IPersistableModel<UserRequestSchedule>.Write(ModelReaderWriterOptions options)

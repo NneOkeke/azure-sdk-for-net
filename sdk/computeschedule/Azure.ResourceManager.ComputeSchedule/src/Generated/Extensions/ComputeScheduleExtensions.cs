@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure.Core;
 using Azure.ResourceManager.ComputeSchedule.Mocking;
 using Azure.ResourceManager.ComputeSchedule.Models;
 using Azure.ResourceManager.Resources;
@@ -17,13 +18,218 @@ namespace Azure.ResourceManager.ComputeSchedule
     /// <summary> A class to add extension methods to Azure.ResourceManager.ComputeSchedule. </summary>
     public static partial class ComputeScheduleExtensions
     {
+        private static MockableComputeScheduleArmClient GetMockableComputeScheduleArmClient(ArmClient client)
+        {
+            return client.GetCachedClient(client0 => new MockableComputeScheduleArmClient(client0));
+        }
+
+        private static MockableComputeScheduleResourceGroupResource GetMockableComputeScheduleResourceGroupResource(ArmResource resource)
+        {
+            return resource.GetCachedClient(client => new MockableComputeScheduleResourceGroupResource(client, resource.Id));
+        }
+
         private static MockableComputeScheduleSubscriptionResource GetMockableComputeScheduleSubscriptionResource(ArmResource resource)
         {
             return resource.GetCachedClient(client => new MockableComputeScheduleSubscriptionResource(client, resource.Id));
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future.
+        /// List AutoActionResources resources by parent
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{resourceUri}/providers/Microsoft.ComputeSchedule/autoActionResources</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AutoActionResources_ListByVms</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2024-08-01-preview</description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableComputeScheduleArmClient.GetAutoActionsExtensionsByVms(ResourceIdentifier,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        public static AsyncPageable<AutoActionResources> GetAutoActionsExtensionsByVmsAsync(this ArmClient client, ResourceIdentifier scope, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableComputeScheduleArmClient(client).GetAutoActionsExtensionsByVmsAsync(scope, cancellationToken);
+        }
+
+        /// <summary>
+        /// List AutoActionResources resources by parent
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/{resourceUri}/providers/Microsoft.ComputeSchedule/autoActionResources</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AutoActionResources_ListByVms</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2024-08-01-preview</description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableComputeScheduleArmClient.GetAutoActionsExtensionsByVms(ResourceIdentifier,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="scope"> The scope that the resource will apply against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        public static Pageable<AutoActionResources> GetAutoActionsExtensionsByVms(this ArmClient client, ResourceIdentifier scope, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableComputeScheduleArmClient(client).GetAutoActionsExtensionsByVms(scope, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets an object representing an <see cref="AutoActionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AutoActionResource.CreateResourceIdentifier" /> to create an <see cref="AutoActionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableComputeScheduleArmClient.GetAutoActionResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="AutoActionResource"/> object. </returns>
+        public static AutoActionResource GetAutoActionResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableComputeScheduleArmClient(client).GetAutoActionResource(id);
+        }
+
+        /// <summary>
+        /// Gets an object representing an <see cref="OccurrenceResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="OccurrenceResource.CreateResourceIdentifier" /> to create an <see cref="OccurrenceResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableComputeScheduleArmClient.GetOccurrenceResource(ResourceIdentifier)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="client"/> is null. </exception>
+        /// <returns> Returns a <see cref="OccurrenceResource"/> object. </returns>
+        public static OccurrenceResource GetOccurrenceResource(this ArmClient client, ResourceIdentifier id)
+        {
+            Argument.AssertNotNull(client, nameof(client));
+
+            return GetMockableComputeScheduleArmClient(client).GetOccurrenceResource(id);
+        }
+
+        /// <summary>
+        /// Gets a collection of AutoActionResources in the ResourceGroupResource.
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableComputeScheduleResourceGroupResource.GetAutoActions()"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> is null. </exception>
+        /// <returns> An object representing collection of AutoActionResources and their operations over a AutoActionResource. </returns>
+        public static AutoActionCollection GetAutoActions(this ResourceGroupResource resourceGroupResource)
+        {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableComputeScheduleResourceGroupResource(resourceGroupResource).GetAutoActions();
+        }
+
+        /// <summary>
+        /// Get a AutoAction
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AutoAction_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2024-08-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AutoActionResource"/></description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableComputeScheduleResourceGroupResource.GetAutoActionAsync(string,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="autoActionName"> The name of the AutoAction. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="autoActionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="autoActionName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<AutoActionResource>> GetAutoActionAsync(this ResourceGroupResource resourceGroupResource, string autoActionName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return await GetMockableComputeScheduleResourceGroupResource(resourceGroupResource).GetAutoActionAsync(autoActionName, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get a AutoAction
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeSchedule/autoActions/{autoActionName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>AutoAction_Get</description>
+        /// </item>
+        /// <item>
+        /// <term>Default Api Version</term>
+        /// <description>2024-08-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AutoActionResource"/></description>
+        /// </item>
+        /// </list>
+        /// <item>
+        /// <term>Mocking</term>
+        /// <description>To mock this method, please mock <see cref="MockableComputeScheduleResourceGroupResource.GetAutoAction(string,CancellationToken)"/> instead.</description>
+        /// </item>
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="autoActionName"> The name of the AutoAction. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupResource"/> or <paramref name="autoActionName"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="autoActionName"/> is an empty string, and was expected to be non-empty. </exception>
+        [ForwardsClientCalls]
+        public static Response<AutoActionResource> GetAutoAction(this ResourceGroupResource resourceGroupResource, string autoActionName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(resourceGroupResource, nameof(resourceGroupResource));
+
+            return GetMockableComputeScheduleResourceGroupResource(resourceGroupResource).GetAutoAction(autoActionName, cancellationToken);
+        }
+
+        /// <summary>
+        /// virtualMachinesSubmitDeallocate: submitDeallocate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -35,7 +241,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -57,7 +263,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitDeallocate: Schedule deallocate operation for a batch of virtual machines at datetime in future.
+        /// virtualMachinesSubmitDeallocate: submitDeallocate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -69,7 +275,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -91,7 +297,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitHibernate: Schedule hibernate operation for a batch of virtual machines at datetime in future.
+        /// virtualMachinesSubmitHibernate: submitHibernate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -103,7 +309,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -125,7 +331,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitHibernate: Schedule hibernate operation for a batch of virtual machines at datetime in future.
+        /// virtualMachinesSubmitHibernate: submitHibernate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -137,7 +343,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -159,7 +365,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitStart: Schedule start operation for a batch of virtual machines at datetime in future.
+        /// virtualMachinesSubmitStart: submitStart for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -171,7 +377,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -193,7 +399,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesSubmitStart: Schedule start operation for a batch of virtual machines at datetime in future.
+        /// virtualMachinesSubmitStart: submitStart for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -205,7 +411,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -227,7 +433,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteDeallocate: executeDeallocate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -239,7 +445,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -261,7 +467,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteDeallocate: Execute deallocate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteDeallocate: executeDeallocate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -273,7 +479,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -295,7 +501,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteHibernate: executeHibernate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -307,7 +513,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -329,7 +535,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteHibernate: Execute hibernate operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteHibernate: executeHibernate for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -341,7 +547,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -363,7 +569,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteStart: executeStart for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -375,7 +581,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -397,7 +603,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesExecuteStart: Execute start operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it.
+        /// virtualMachinesExecuteStart: executeStart for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -409,7 +615,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -431,7 +637,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines
+        /// virtualMachinesGetOperationStatus: getOperationStatus for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -443,7 +649,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -465,7 +671,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesGetOperationStatus: Polling endpoint to read status of operations performed on virtual machines
+        /// virtualMachinesGetOperationStatus: getOperationStatus for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -477,7 +683,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -499,7 +705,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request
+        /// virtualMachinesCancelOperations: cancelOperations for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -511,7 +717,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -533,7 +739,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesCancelOperations: Cancel a previously submitted (start/deallocate/hibernate) request
+        /// virtualMachinesCancelOperations: cancelOperations for a virtual machine
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
@@ -545,7 +751,7 @@ namespace Azure.ResourceManager.ComputeSchedule
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
         /// </item>
         /// </list>
         /// <item>
@@ -567,71 +773,75 @@ namespace Azure.ResourceManager.ComputeSchedule
         }
 
         /// <summary>
-        /// VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist.
+        /// List AutoAction resources by subscription ID
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationErrors</description>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/autoActions</description>
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>ScheduledActions_GetVirtualMachineOperationErrors</description>
+        /// <description>AutoAction_ListBySubscription</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AutoActionResource"/></description>
         /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableComputeScheduleSubscriptionResource.GetVirtualMachineOperationErrors(string,GetOperationErrorsContent,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableComputeScheduleSubscriptionResource.GetAutoActions(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="locationparameter"> The location name. </param>
-        /// <param name="content"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="locationparameter"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/>, <paramref name="locationparameter"/> or <paramref name="content"/> is null. </exception>
-        public static async Task<Response<GetOperationErrorsResult>> GetVirtualMachineOperationErrorsAsync(this SubscriptionResource subscriptionResource, string locationparameter, GetOperationErrorsContent content, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> An async collection of <see cref="AutoActionResource"/> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<AutoActionResource> GetAutoActionsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
 
-            return await GetMockableComputeScheduleSubscriptionResource(subscriptionResource).GetVirtualMachineOperationErrorsAsync(locationparameter, content, cancellationToken).ConfigureAwait(false);
+            return GetMockableComputeScheduleSubscriptionResource(subscriptionResource).GetAutoActionsAsync(cancellationToken);
         }
 
         /// <summary>
-        /// VirtualMachinesGetOperationErrors: Get error details on operation errors (like transient errors encountered, additional logs) if they exist.
+        /// List AutoAction resources by subscription ID
         /// <list type="bullet">
         /// <item>
         /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/locations/{locationparameter}/virtualMachinesGetOperationErrors</description>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.ComputeSchedule/autoActions</description>
         /// </item>
         /// <item>
         /// <term>Operation Id</term>
-        /// <description>ScheduledActions_GetVirtualMachineOperationErrors</description>
+        /// <description>AutoAction_ListBySubscription</description>
         /// </item>
         /// <item>
         /// <term>Default Api Version</term>
-        /// <description>2024-10-01</description>
+        /// <description>2024-08-01-preview</description>
+        /// </item>
+        /// <item>
+        /// <term>Resource</term>
+        /// <description><see cref="AutoActionResource"/></description>
         /// </item>
         /// </list>
         /// <item>
         /// <term>Mocking</term>
-        /// <description>To mock this method, please mock <see cref="MockableComputeScheduleSubscriptionResource.GetVirtualMachineOperationErrors(string,GetOperationErrorsContent,CancellationToken)"/> instead.</description>
+        /// <description>To mock this method, please mock <see cref="MockableComputeScheduleSubscriptionResource.GetAutoActions(CancellationToken)"/> instead.</description>
         /// </item>
         /// </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="locationparameter"> The location name. </param>
-        /// <param name="content"> The request body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="locationparameter"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/>, <paramref name="locationparameter"/> or <paramref name="content"/> is null. </exception>
-        public static Response<GetOperationErrorsResult> GetVirtualMachineOperationErrors(this SubscriptionResource subscriptionResource, string locationparameter, GetOperationErrorsContent content, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionResource"/> is null. </exception>
+        /// <returns> A collection of <see cref="AutoActionResource"/> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<AutoActionResource> GetAutoActions(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(subscriptionResource, nameof(subscriptionResource));
 
-            return GetMockableComputeScheduleSubscriptionResource(subscriptionResource).GetVirtualMachineOperationErrors(locationparameter, content, cancellationToken);
+            return GetMockableComputeScheduleSubscriptionResource(subscriptionResource).GetAutoActions(cancellationToken);
         }
     }
 }

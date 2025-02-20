@@ -9,28 +9,169 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 
 namespace Azure.ResourceManager.ComputeSchedule.Models
 {
     /// <summary> Model factory for models. </summary>
     public static partial class ArmComputeScheduleModelFactory
     {
-        /// <summary> Initializes a new instance of <see cref="Models.UserRequestSchedule"/>. </summary>
-        /// <param name="deadline"> The deadline for the operation. </param>
-        /// <param name="userRequestDeadline"> The deadline for the operation. </param>
-        /// <param name="timezone"> The timezone for the operation. </param>
-        /// <param name="userRequestTimezone"> The timezone for the operation. </param>
-        /// <param name="deadlineType"> The deadlinetype of the operation, this can either be InitiateAt or CompleteBy. </param>
-        /// <returns> A new <see cref="Models.UserRequestSchedule"/> instance for mocking. </returns>
-        public static UserRequestSchedule UserRequestSchedule(DateTimeOffset? deadline = null, DateTimeOffset? userRequestDeadline = null, string timezone = null, string userRequestTimezone = null, ScheduledActionDeadlineType deadlineType = default)
+        /// <summary> Initializes a new instance of <see cref="ComputeSchedule.OccurrenceData"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <returns> A new <see cref="ComputeSchedule.OccurrenceData"/> instance for mocking. </returns>
+        public static OccurrenceData OccurrenceData(ResourceIdentifier id = null, string name = null, Core.ResourceType resourceType = default, SystemData systemData = null, OccurrenceProperties properties = null)
         {
-            return new UserRequestSchedule(
-                deadline,
-                userRequestDeadline,
-                timezone,
-                userRequestTimezone,
-                deadlineType,
+            return new OccurrenceData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                properties,
                 serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.OccurrenceProperties"/>. </summary>
+        /// <param name="initialScheduledOn"> The time the occurrence was initial scheduled for. Actual scheduled time for resources can change by calling the delay API. </param>
+        /// <param name="resultSummary"> The result for occurrences that achieved a terminal state. </param>
+        /// <param name="provisioningState"> The aggregated provisioning state of the occurrence. </param>
+        /// <returns> A new <see cref="Models.OccurrenceProperties"/> instance for mocking. </returns>
+        public static OccurrenceProperties OccurrenceProperties(DateTimeOffset initialScheduledOn = default, OccurrenceResultSummary resultSummary = null, OccurrenceState? provisioningState = null)
+        {
+            return new OccurrenceProperties(initialScheduledOn, resultSummary, provisioningState, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.OccurrenceResultSummary"/>. </summary>
+        /// <param name="total"> The total number of resources that the occurrence was supposed to act on. </param>
+        /// <param name="statuses"> The summarized status of the resources. </param>
+        /// <returns> A new <see cref="Models.OccurrenceResultSummary"/> instance for mocking. </returns>
+        public static OccurrenceResultSummary OccurrenceResultSummary(int total = default, IEnumerable<ResourceResultSummary> statuses = null)
+        {
+            statuses ??= new List<ResourceResultSummary>();
+
+            return new OccurrenceResultSummary(total, statuses?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ResourceResultSummary"/>. </summary>
+        /// <param name="code"> The error code for those resources. In case of success, code is populated with Success. </param>
+        /// <param name="count"> The number of resources that the code applies to. </param>
+        /// <param name="errorDetails"> The error details for the resources. Not populated on success cases. </param>
+        /// <returns> A new <see cref="Models.ResourceResultSummary"/> instance for mocking. </returns>
+        public static ResourceResultSummary ResourceResultSummary(string code = null, int count = default, ResponseError errorDetails = null)
+        {
+            return new ResourceResultSummary(code, count, errorDetails, serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.OccurrenceResource"/>. </summary>
+        /// <param name="resourceId"> The ARM Id of the resource. </param>
+        /// <param name="notificationSettings"> The desired notification settings for the specified resource. </param>
+        /// <param name="scheduledOn"> The time the occurrence is scheduled for the resource. </param>
+        /// <param name="provisioningState"> The current state of the resource. </param>
+        /// <param name="errorDetails"> Error details for the resource. Only populated if resource is in failed state. </param>
+        /// <returns> A new <see cref="Models.OccurrenceResource"/> instance for mocking. </returns>
+        public static OccurrenceResource OccurrenceResource(ResourceIdentifier resourceId = null, IEnumerable<NotificationProperties> notificationSettings = null, DateTimeOffset scheduledOn = default, ResourceProvisioningState? provisioningState = null, ResponseError errorDetails = null)
+        {
+            notificationSettings ??= new List<NotificationProperties>();
+
+            return new OccurrenceResource(
+                resourceId,
+                notificationSettings?.ToList(),
+                scheduledOn,
+                provisioningState,
+                errorDetails,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.AutoActionResources"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <returns> A new <see cref="Models.AutoActionResources"/> instance for mocking. </returns>
+        public static AutoActionResources AutoActionResources(ResourceIdentifier id = null, string name = null, Core.ResourceType resourceType = default, SystemData systemData = null, AutoActionProperties properties = null)
+        {
+            return new AutoActionResources(
+                id,
+                name,
+                resourceType,
+                systemData,
+                properties,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.AutoActionProperties"/>. </summary>
+        /// <param name="resourceType"> The type of resource the auto action is targeting. </param>
+        /// <param name="actionType"> The action the auto action should perform in the resources. </param>
+        /// <param name="startOn"> The time which the auto action is supposed to start running. </param>
+        /// <param name="endOn"> The time when the auto action is supposed to stop scheduling. </param>
+        /// <param name="schedule"> The schedule the auto action is supposed to follow. </param>
+        /// <param name="notificationSettings"> The notification settings for the auto action. </param>
+        /// <param name="disabled"> Tell if the auto action is disabled or not. </param>
+        /// <param name="provisioningState"> The status of the last provisioning operation performed on the resource. </param>
+        /// <returns> A new <see cref="Models.AutoActionProperties"/> instance for mocking. </returns>
+        public static AutoActionProperties AutoActionProperties(ResourceType resourceType = default, ActionType actionType = default, DateTimeOffset startOn = default, DateTimeOffset? endOn = null, AutoActionSchedule schedule = null, IEnumerable<NotificationProperties> notificationSettings = null, bool? disabled = null, ProvisioningState? provisioningState = null)
+        {
+            notificationSettings ??= new List<NotificationProperties>();
+
+            return new AutoActionProperties(
+                resourceType,
+                actionType,
+                startOn,
+                endOn,
+                schedule,
+                notificationSettings?.ToList(),
+                disabled,
+                provisioningState,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="ComputeSchedule.AutoActionData"/>. </summary>
+        /// <param name="id"> The id. </param>
+        /// <param name="name"> The name. </param>
+        /// <param name="resourceType"> The resourceType. </param>
+        /// <param name="systemData"> The systemData. </param>
+        /// <param name="tags"> The tags. </param>
+        /// <param name="location"> The location. </param>
+        /// <param name="properties"> The resource-specific properties for this resource. </param>
+        /// <returns> A new <see cref="ComputeSchedule.AutoActionData"/> instance for mocking. </returns>
+        public static AutoActionData AutoActionData(ResourceIdentifier id = null, string name = null, Core.ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, AutoActionProperties properties = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new AutoActionData(
+                id,
+                name,
+                resourceType,
+                systemData,
+                tags,
+                location,
+                properties,
+                serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.AutoActionResourceOperationResult"/>. </summary>
+        /// <param name="totalResources"> The total number of resources operated on. </param>
+        /// <param name="resourcesStatuses"> The resource status of for each resource. </param>
+        /// <returns> A new <see cref="Models.AutoActionResourceOperationResult"/> instance for mocking. </returns>
+        public static AutoActionResourceOperationResult AutoActionResourceOperationResult(int totalResources = default, IEnumerable<ResourceStatus> resourcesStatuses = null)
+        {
+            resourcesStatuses ??= new List<ResourceStatus>();
+
+            return new AutoActionResourceOperationResult(totalResources, resourcesStatuses?.ToList(), serializedAdditionalRawData: null);
+        }
+
+        /// <summary> Initializes a new instance of <see cref="Models.ResourceStatus"/>. </summary>
+        /// <param name="resourceId"> The arm identifier of the resource. </param>
+        /// <param name="status"> The state the resource is currently on. </param>
+        /// <param name="error"> Errors encountered while trying to perform. </param>
+        /// <returns> A new <see cref="Models.ResourceStatus"/> instance for mocking. </returns>
+        public static ResourceStatus ResourceStatus(ResourceIdentifier resourceId = null, ResourceOperationStatus status = default, ResponseError error = null)
+        {
+            return new ResourceStatus(resourceId, status, error, serializedAdditionalRawData: null);
         }
 
         /// <summary> Initializes a new instance of <see cref="Models.DeallocateResourceOperationResult"/>. </summary>
@@ -39,7 +180,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         /// <param name="location"> The location of the deallocate request eg westus. </param>
         /// <param name="results"> The results from the deallocate request if no errors exist. </param>
         /// <returns> A new <see cref="Models.DeallocateResourceOperationResult"/> instance for mocking. </returns>
-        public static DeallocateResourceOperationResult DeallocateResourceOperationResult(string description = null, string resourceType = null, AzureLocation location = default, IEnumerable<ResourceOperationResult> results = null)
+        public static DeallocateResourceOperationResult DeallocateResourceOperationResult(string description = null, string resourceType = null, string location = null, IEnumerable<ResourceOperationResult> results = null)
         {
             results ??= new List<ResourceOperationResult>();
 
@@ -52,7 +193,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         /// <param name="errorDetails"> Resource level error details if they exist. </param>
         /// <param name="operation"> Details of the operation performed on a resource. </param>
         /// <returns> A new <see cref="Models.ResourceOperationResult"/> instance for mocking. </returns>
-        public static ResourceOperationResult ResourceOperationResult(ResourceIdentifier resourceId = null, string errorCode = null, string errorDetails = null, ResourceOperationDetails operation = null)
+        public static ResourceOperationResult ResourceOperationResult(string resourceId = null, string errorCode = null, string errorDetails = null, ResourceOperationDetails operation = null)
         {
             return new ResourceOperationResult(resourceId, errorCode, errorDetails, operation, serializedAdditionalRawData: null);
         }
@@ -65,13 +206,12 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         /// <param name="deadline"> Deadline for the operation. </param>
         /// <param name="deadlineType"> Type of deadline of the operation. </param>
         /// <param name="state"> Current state of the operation. </param>
-        /// <param name="timezone"> Timezone for the operation. </param>
-        /// <param name="operationTimezone"> Timezone for the operation. </param>
+        /// <param name="timeZone"> Timezone for the operation. </param>
         /// <param name="resourceOperationError"> Operation level errors if they exist. </param>
         /// <param name="completedOn"> Time the operation was complete if errors are null. </param>
         /// <param name="retryPolicy"> Retry policy the user can pass. </param>
         /// <returns> A new <see cref="Models.ResourceOperationDetails"/> instance for mocking. </returns>
-        public static ResourceOperationDetails ResourceOperationDetails(string operationId = null, ResourceIdentifier resourceId = null, ResourceOperationType? opType = null, string subscriptionId = null, DateTimeOffset? deadline = null, ScheduledActionDeadlineType? deadlineType = null, ScheduledActionOperationState? state = null, string timezone = null, string operationTimezone = null, ResourceOperationError resourceOperationError = null, DateTimeOffset? completedOn = null, UserRequestRetryPolicy retryPolicy = null)
+        public static ResourceOperationDetails ResourceOperationDetails(string operationId = null, string resourceId = null, ResourceOperationType opType = default, string subscriptionId = null, DateTimeOffset deadline = default, ScheduledActionDeadlineType deadlineType = default, ScheduledActionOperationState state = default, string timeZone = null, ResourceOperationError resourceOperationError = null, DateTimeOffset? completedOn = null, UserRequestRetryPolicy retryPolicy = null)
         {
             return new ResourceOperationDetails(
                 operationId,
@@ -81,8 +221,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
                 deadline,
                 deadlineType,
                 state,
-                timezone,
-                operationTimezone,
+                timeZone,
                 resourceOperationError,
                 completedOn,
                 retryPolicy,
@@ -104,7 +243,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         /// <param name="location"> The location of the Hibernate request eg westus. </param>
         /// <param name="results"> The results from the Hibernate request if no errors exist. </param>
         /// <returns> A new <see cref="Models.HibernateResourceOperationResult"/> instance for mocking. </returns>
-        public static HibernateResourceOperationResult HibernateResourceOperationResult(string description = null, string resourceType = null, AzureLocation location = default, IEnumerable<ResourceOperationResult> results = null)
+        public static HibernateResourceOperationResult HibernateResourceOperationResult(string description = null, string resourceType = null, string location = null, IEnumerable<ResourceOperationResult> results = null)
         {
             results ??= new List<ResourceOperationResult>();
 
@@ -117,7 +256,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         /// <param name="location"> The location of the start request eg westus. </param>
         /// <param name="results"> The results from the start request if no errors exist. </param>
         /// <returns> A new <see cref="Models.StartResourceOperationResult"/> instance for mocking. </returns>
-        public static StartResourceOperationResult StartResourceOperationResult(string description = null, string resourceType = null, AzureLocation location = default, IEnumerable<ResourceOperationResult> results = null)
+        public static StartResourceOperationResult StartResourceOperationResult(string description = null, string resourceType = null, string location = null, IEnumerable<ResourceOperationResult> results = null)
         {
             results ??= new List<ResourceOperationResult>();
 
@@ -142,60 +281,6 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
             results ??= new List<ResourceOperationResult>();
 
             return new CancelOperationsResult(results?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.GetOperationErrorsResult"/>. </summary>
-        /// <param name="results"> An array of operationids and their corresponding errors if any. </param>
-        /// <returns> A new <see cref="Models.GetOperationErrorsResult"/> instance for mocking. </returns>
-        public static GetOperationErrorsResult GetOperationErrorsResult(IEnumerable<OperationErrorsResult> results = null)
-        {
-            results ??= new List<OperationErrorsResult>();
-
-            return new GetOperationErrorsResult(results?.ToList(), serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.OperationErrorsResult"/>. </summary>
-        /// <param name="operationId"> The operationId identifying a vm operation. </param>
-        /// <param name="createdOn"> The creation time of the error result. </param>
-        /// <param name="activationOn"> The activation time of a vm operation. </param>
-        /// <param name="completedOn"> The completion time of the operation if the operation was completed. </param>
-        /// <param name="operationErrors"> A list of errors associated with the operationid. </param>
-        /// <param name="requestErrorCode"> Request level error code. </param>
-        /// <param name="requestErrorDetails"> Request level error details. </param>
-        /// <returns> A new <see cref="Models.OperationErrorsResult"/> instance for mocking. </returns>
-        public static OperationErrorsResult OperationErrorsResult(string operationId = null, DateTimeOffset? createdOn = null, DateTimeOffset? activationOn = null, DateTimeOffset? completedOn = null, IEnumerable<OperationErrorDetails> operationErrors = null, string requestErrorCode = null, string requestErrorDetails = null)
-        {
-            operationErrors ??= new List<OperationErrorDetails>();
-
-            return new OperationErrorsResult(
-                operationId,
-                createdOn,
-                activationOn,
-                completedOn,
-                operationErrors?.ToList(),
-                requestErrorCode,
-                requestErrorDetails,
-                serializedAdditionalRawData: null);
-        }
-
-        /// <summary> Initializes a new instance of <see cref="Models.OperationErrorDetails"/>. </summary>
-        /// <param name="errorCode"> The error code of the operation. </param>
-        /// <param name="errorDetails"> The error details of the operation. </param>
-        /// <param name="timestamp"> The timestamp of the error occurence. </param>
-        /// <param name="errorDetailsTimestamp"> The timestamp of the error occurence. </param>
-        /// <param name="azureOperationName"> The compute operationid of the Start/Deallocate/Hibernate request. </param>
-        /// <param name="crpOperationId"> The compute operationid of the Start/Deallocate/Hibernate request. </param>
-        /// <returns> A new <see cref="Models.OperationErrorDetails"/> instance for mocking. </returns>
-        public static OperationErrorDetails OperationErrorDetails(string errorCode = null, string errorDetails = null, DateTimeOffset? timestamp = null, DateTimeOffset? errorDetailsTimestamp = null, string azureOperationName = null, string crpOperationId = null)
-        {
-            return new OperationErrorDetails(
-                errorCode,
-                errorDetails,
-                timestamp,
-                errorDetailsTimestamp,
-                azureOperationName,
-                crpOperationId,
-                serializedAdditionalRawData: null);
         }
     }
 }

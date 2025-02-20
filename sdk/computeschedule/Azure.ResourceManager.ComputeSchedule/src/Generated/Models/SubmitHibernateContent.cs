@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using Azure.Core;
 
 namespace Azure.ResourceManager.ComputeSchedule.Models
 {
@@ -50,7 +49,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         /// <param name="schedule"> The schedule for the request. </param>
         /// <param name="executionParameters"> The execution parameters for the request. </param>
         /// <param name="resources"> The resources for the request. </param>
-        /// <param name="correlationId"> CorrelationId item. </param>
+        /// <param name="correlationId"> Correlationid item. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="schedule"/>, <paramref name="executionParameters"/>, <paramref name="resources"/> or <paramref name="correlationId"/> is null. </exception>
         public SubmitHibernateContent(UserRequestSchedule schedule, ScheduledActionExecutionParameterDetail executionParameters, UserRequestResources resources, string correlationId)
         {
@@ -69,7 +68,7 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         /// <param name="schedule"> The schedule for the request. </param>
         /// <param name="executionParameters"> The execution parameters for the request. </param>
         /// <param name="resources"> The resources for the request. </param>
-        /// <param name="correlationId"> CorrelationId item. </param>
+        /// <param name="correlationId"> Correlationid item. </param>
         /// <param name="serializedAdditionalRawData"> Keeps track of any properties unknown to the library. </param>
         internal SubmitHibernateContent(UserRequestSchedule schedule, ScheduledActionExecutionParameterDetail executionParameters, UserRequestResources resources, string correlationId, IDictionary<string, BinaryData> serializedAdditionalRawData)
         {
@@ -92,12 +91,12 @@ namespace Azure.ResourceManager.ComputeSchedule.Models
         /// <summary> The resources for the request. </summary>
         internal UserRequestResources Resources { get; }
         /// <summary> The resource ids used for the request. </summary>
-        public IList<ResourceIdentifier> ResourcesIds
+        public IList<string> ResourcesIds
         {
             get => Resources?.Ids;
         }
 
-        /// <summary> CorrelationId item. </summary>
+        /// <summary> Correlationid item. </summary>
         public string CorrelationId { get; }
     }
 }

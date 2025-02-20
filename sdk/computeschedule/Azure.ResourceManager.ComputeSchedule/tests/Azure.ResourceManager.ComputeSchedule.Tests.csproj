@@ -9,6 +9,6 @@
     <PackageReference Include="Polly.Contrib.WaitAndRetry" />
   </ItemGroup>
   <ItemGroup>
-   <ProjectReference Include="$(AzureCoreTestFramework)" />
+  <ProjectReference Include="$(AzureCoreTestFramework)" />
   </ItemGroup>
 </Project>

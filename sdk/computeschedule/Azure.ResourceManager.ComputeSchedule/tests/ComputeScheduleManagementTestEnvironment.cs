@@ -5,7 +5,7 @@ using Azure.Core.TestFramework;
 
 namespace Azure.ResourceManager.ComputeSchedule.Tests
 {
-    public class ComputeScheduleManagementTestEnvironment : TestEnvironment
+    public class ComputescheduleManagementTestEnvironment : TestEnvironment
     {
     }
 }
